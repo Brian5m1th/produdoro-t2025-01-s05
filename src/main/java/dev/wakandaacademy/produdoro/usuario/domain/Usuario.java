@@ -65,4 +65,17 @@ public class Usuario {
 			throw APIException.build(HttpStatus.CONFLICT, "Usuário já esta em PAUSA LONGA!");
 		}
 	}
+
+
+	public void alteraStatusUsuario(UUID idUsuario, StatusUsuario statusUsuario) {
+		validaUsuario(idUsuario);
+		validaStatusUsuario(statusUsuario);
+		this.status = statusUsuario;
+	}
+
+	private void validaStatusUsuario(StatusUsuario statusUsuario) {
+		if(this.status.equals(statusUsuario)) {
+			throw APIException.build(HttpStatus.BAD_REQUEST , "O status do usuário já é " + statusUsuario );
+		}
+	}
 }

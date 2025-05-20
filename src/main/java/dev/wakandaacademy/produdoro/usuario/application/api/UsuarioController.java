@@ -2,6 +2,7 @@ package dev.wakandaacademy.produdoro.usuario.application.api;
 
 import javax.validation.Valid;
 
+import dev.wakandaacademy.produdoro.usuario.domain.StatusUsuario;
 import dev.wakandaacademy.produdoro.config.security.service.TokenService;
 import dev.wakandaacademy.produdoro.handler.APIException;
 import org.springframework.http.HttpStatus;
@@ -51,5 +52,13 @@ public class UsuarioController implements UsuarioAPI {
 		String usuario = tokenService.getUsuarioByBearerToken(token).orElseThrow(() -> APIException.build(HttpStatus.UNAUTHORIZED, token));
 		log.info("[usuario] {}", usuario);
 		return usuario;
+	}
+
+	@Override
+	public void patchStatusFoco(String token, UUID idUsuario) {
+		log.info("[start] UsuarioController - patchStatusFoco");
+		String emailUsuario = getUsuarioByToken(token);
+		usuarioAppplicationService.alteraStatusUsuarioParaFoco(emailUsuario, idUsuario);
+		log.info("[finish] UsuarioController - patchStatusFoco");
 	}
 }
