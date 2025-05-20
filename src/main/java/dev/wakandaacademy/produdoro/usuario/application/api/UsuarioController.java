@@ -55,9 +55,10 @@ public class UsuarioController implements UsuarioAPI {
 	}
 
 	@Override
-	public void patchStatusFoco(UUID idUsuario) {
+	public void patchStatusFoco(String token, UUID idUsuario) {
 		log.info("[start] UsuarioController - patchStatusFoco");
-		usuarioAppplicationService.alteraStatusUsuarioParaFoco(idUsuario);
+		String emailUsuario = getUsuarioByToken(token);
+		usuarioAppplicationService.alteraStatusUsuarioParaFoco(emailUsuario, idUsuario);
 		log.info("[finish] UsuarioController - patchStatusFoco");
 	}
 }

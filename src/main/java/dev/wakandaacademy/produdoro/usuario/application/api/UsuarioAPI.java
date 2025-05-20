@@ -25,6 +25,6 @@ public interface UsuarioAPI {
 
 	@PatchMapping(value = "/{idUsuario}/foco")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	void patchStatusFoco(@PathVariable UUID idUsuario);
+	void patchStatusFoco(@RequestHeader(name = "Authorization", required = true)String token, @PathVariable UUID idUsuario);
 
 }

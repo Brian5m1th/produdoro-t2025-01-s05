@@ -67,7 +67,8 @@ public class Usuario {
 	}
 
 
-	public void alteraStatusUsuario(StatusUsuario statusUsuario) {
+	public void alteraStatusUsuario(UUID idUsuario, StatusUsuario statusUsuario) {
+		validaUsuario(idUsuario);
 		validaStatusUsuario(statusUsuario);
 		this.status = statusUsuario;
 	}
